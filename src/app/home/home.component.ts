@@ -15,10 +15,9 @@ public ofertas: Array<Oferta>
   constructor(private ofertasService: OfertasService) { }
 
   ngOnInit() {
-    this.ofertasService.getOfertas2()
+    this.ofertasService.getOfertas()
       .then((ofertas: Array<Oferta>) => {
         this.ofertas = ofertas
-        console.log('paasou 3 segundos')
       })
       .catch((erro) => {
         console.log(erro)

@@ -27,3 +27,6 @@ h3 {
 .navbar{
     background: #FFF;
 }
+button{
+    cursor: pointer;
+}

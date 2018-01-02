@@ -1,79 +1,37 @@
+import { Http } from '@angular/http'
+import { Injectable } from '@angular/core'
 import {Oferta} from './shared/oferta.model'
+import { URL_API_OFERTAS} from './app.api'
 
+import 'rxjs/add/operator/toPromise'
+
+@Injectable()
 export class OfertasService{
 
-   public ofertas: Array<Oferta>  = [
-	{
-		id: 1,
-		categoria: "restaurante",
-		titulo: "Super Burger",
-		descricao_oferta: "Rodízio de Mini-hambúrger com opção de entrada.",
-		anunciante: "Original Burger",
-		valor: 29.90,
-		destaque: true,
-		imagens: [
-			{url: "/assets/ofertas/1/img1.jpg"},
-			{url: "/assets/ofertas/1/img2.jpg"},
-			{url: "/assets/ofertas/1/img3.jpg"},
-			{url: "/assets/ofertas/1/img4.jpg"}
-		]
-	},
-	{
-		id: 2,
-		categoria: "restaurante",
-		titulo: "Cozinha Mexicana",
-		descricao_oferta: "Almoço ou Jantar com Rodízio Mexicano delicioso.",
-		anunciante: "Mexicana",
-		valor: 32.90,
-		destaque: true,
-		imagens: [
-			{url: "/assets/ofertas/2/img1.jpg"},
-			{url: "/assets/ofertas/2/img2.jpg"},
-			{url: "/assets/ofertas/2/img3.jpg"},
-			{url: "/assets/ofertas/2/img4.jpg"}
-		]
-	
-	},
-	{
-		id: 4,
-		categoria: "diversao",
-		titulo: "Estância das águas",
-		descricao_oferta: "Diversão garantida com piscinas, trilhas e muito mais.",
-		anunciante: "Estância das águas",
-		valor: 31.90,
-		destaque: true,
-		imagens: [
-			{url: "/assets/ofertas/3/img1.jpg"},
-			{url: "/assets/ofertas/3/img2.jpg"},
-			{url: "/assets/ofertas/3/img3.jpg"},
-			{url: "/assets/ofertas/3/img4.jpg"},
-			{url: "/assets/ofertas/3/img5.jpg"},
-			{url: "/assets/ofertas/3/img6.jpg"}
-		]
-	}
-]
 
-    public getOfertas(): Array<Oferta>{
-        return this.ofertas
+constructor(private http: Http){}
+
+
+    public getOfertas(): Promise<Oferta[]>{
+		//efetuar uma requisição http
+		//retornar uma promise Ofertas[]
+		return this.http.get(`${URL_API_OFERTAS}?destaque=true`)
+			.toPromise()
+			.then((resposta: any) => resposta.json())
+		
     }
 
-    public getOfertas2(): Promise<Oferta[]> {
-        return new Promise((resolve, reject) => {
-            let deu_certo = true
-            return deu_certo ? setTimeout(()=>{resolve(this.ofertas)},3000) : reject({message:"Erroww"})
-        })
-        .then((ofertas: Oferta[])=>{
-            return ofertas
-        })
-        .then((ofertas: Oferta[]) => {
-            return new Promise((resolve2, reject2)=>{
-                setTimeout(()=>{resolve2(ofertas)},3000)
-            })
-        })
-        .then((ofertas: Oferta[])=> {
-            console.log("essa fera ai meu")
-            return ofertas
-        })
+    public getOfertasPorCategoria(categoria: string) : Promise<Oferta[]>{
+        return this.http.get(`${URL_API_OFERTAS}?categoria=${categoria}`)
+        .toPromise()
+        .then((resposta: any) => resposta.json())
     }
+
+    public getOfertaPorId(id: number) : Promise<Oferta>{
+        return this.http.get(`${URL_API_OFERTAS}?id=${id}`)
+        .toPromise()
+        .then((resposta: any) => resposta.json().shift())
+    }
+
 
 }
