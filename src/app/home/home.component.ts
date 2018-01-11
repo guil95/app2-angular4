@@ -23,7 +23,6 @@ public ofertas: Array<Oferta>
         console.log(erro)
 
       });
-    console.log('oi')
   }
 
 }

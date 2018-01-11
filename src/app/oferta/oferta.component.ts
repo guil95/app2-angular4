@@ -6,6 +6,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx'
 import { Observer } from 'rxjs/Observer';
 import { Subscription } from 'rxjs/Subscription';
+import { Params } from '@angular/router';
+import {CarrinhoService} from '../carrinho.service'
 @Component({
   selector: 'app-oferta',
   templateUrl: './oferta.component.html',
@@ -21,49 +23,29 @@ export class OfertaComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute, 
-    private ofertasService: OfertasService) {
-
-     }
+    private ofertasService: OfertasService,
+    private carrinhoService: CarrinhoService
+  ) {}
 
   ngOnInit() {
-    // this.route.snapshot.params['id']
 
-    // this.route.params.subscribe((param) => {
-    //   console.log(param)
-    // })
-
-    this.ofertasService.getOfertaPorId(this.route.snapshot.params['id'])
-        .then((oferta: Oferta) => {
-          this.oferta = oferta
+    this.route.params.subscribe((params: Params) => {
+      
+      this.ofertasService.getOfertaPorId(params.id)
+          .then((oferta: Oferta) => {
+             this.oferta = oferta
         })
-    
-    // //observable (observável)
-    // let meuObservableTeste = Observable.create((observer: Observer<number>)=> {
-    //   observer.next(1)
+    })   
 
-    //   observer.complete()
-    //   observer.error('cagado')
-    //   observer.next(2)
-    // })
+  }
 
-
-    // //observable (observador)
-    // this.meuObservableTesteSubscription = meuObservableTeste.subscribe(
-    //     (resultado: any) => console.log(resultado + 7),
-    //     (erro: string) => console.log(erro),
-    //     () => console.log('deu certo')
-    // )
-
-
-
-  //   let tempo = Observable.interval(500)
-
-  //  this.tempoObservableSubscription =  tempo.subscribe(()=>console.log('chupa'))
+  public adicionarItemCarrinho(): void{
+    this.carrinhoService.incluirItem(this.oferta)
+    console.log(this.carrinhoService.exibirItens())
   }
 
   ngOnDestroy(){
-    // this.meuObservableTesteSubscription.unsubscribe()
-    // this.tempoObservableSubscription.unsubscribe()
+
   }
 
 }
