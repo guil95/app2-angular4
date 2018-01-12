@@ -22,3 +22,18 @@
 .active {
     color: #FFF 
 }
+
+.quantidade-carrinho{
+    background-color: red;
+    padding: 0px 5px;
+    border-radius: 50%;
+    color: #FFF;
+    margin-top: 17px;
+    position: absolute;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.quantidade-carrinho:hover{
+    cursor: pointer;
+}
