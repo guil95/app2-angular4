@@ -20,7 +20,7 @@ export class TopoComponent implements OnInit {
 
   constructor(
     private ofertasService: OfertasService,
-    private carrinhoService: CarrinhoService) { }
+    public carrinhoService: CarrinhoService) { }
 
   ngOnInit() {
     this.ofertas = this.subjectPesquisa
