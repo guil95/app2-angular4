@@ -24,7 +24,7 @@ export class OfertaComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute, 
     private ofertasService: OfertasService,
-    private carrinhoService: CarrinhoService
+    public carrinhoService: CarrinhoService
   ) {}
 
   ngOnInit() {
