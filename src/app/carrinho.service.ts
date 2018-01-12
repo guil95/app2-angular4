@@ -89,4 +89,8 @@ export class CarrinhoService {
 
         return total
     }
+
+    public limparCarrinho(){
+        this.itens = []
+    }
 }

@@ -23,7 +23,8 @@ import { DescricaoReduzida } from './util/descricao-reduzida.pipe';
 import { CarrinhoService } from './carrinho.service'
 
 import { OrdemCompraComponent } from './ordem-compra/ordem-compra.component';
-import { OrdemCompraSucessoComponent } from './ordem-compra-sucesso/ordem-compra-sucesso.component'
+import { OrdemCompraSucessoComponent } from './ordem-compra-sucesso/ordem-compra-sucesso.component';
+import { OrdemCompraCarrinhoVazioComponent } from './ordem-compra-carrinho-vazio/ordem-compra-carrinho-vazio.component'
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { OrdemCompraSucessoComponent } from './ordem-compra-sucesso/ordem-compra
     OndeFicaComponent,
     DescricaoReduzida,
     OrdemCompraComponent,
-    OrdemCompraSucessoComponent
+    OrdemCompraSucessoComponent,
+    OrdemCompraCarrinhoVazioComponent
   ],
   imports: [
     BrowserModule,

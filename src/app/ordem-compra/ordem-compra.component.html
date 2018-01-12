@@ -1,5 +1,6 @@
 <div class="container">
-  <div class="ordem-compra" *ngIf="idPedidoCompra === undefined ">
+  <div class="ordem-compra" *ngIf="idPedidoCompra === undefined">
+    <div *ngIf="carrinhoService.exibirItens().length > 0; else carrinhoVazio">
     <form [formGroup]="formulario" novalidate (ngSubmit)="confirmarCompra()">
     
       <h5>Sua Compra</h5>
@@ -104,6 +105,13 @@
         [disabled]="formulario.invalid"
       >Cofirmar compra</button>
     </form>
+    </div>
+    
+      <ng-template #carrinhoVazio>
+          <div class="ordem-compra" >
+              <app-ordem-compra-carrinho-vazio></app-ordem-compra-carrinho-vazio>
+          </div>
+      </ng-template>
   </div>
   <div class="ordem-compra" *ngIf="idPedidoCompra !== undefined ">
       <app-ordem-compra-sucesso [idPedidoCompra]="idPedidoCompra"></app-ordem-compra-sucesso>
